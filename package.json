@@ -5,7 +5,6 @@
   "author": "Harpo Jaeger <harpo.jaeger@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.17.1",
     "dotenv": "^4.0.0",
     "express": "^4.16.2"
   },

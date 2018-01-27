@@ -10,7 +10,9 @@ app.get('/bullet', (req, res) => {
 })
 
 app.get('/station', (req, res) => {
-  res.send(station())
+  station()
+  .then(station => res.send(station))
+  .catch(err => res.sendStatus(500))
 })
 
 app.get('/reason', (req, res) => {
