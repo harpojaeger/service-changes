@@ -61,7 +61,7 @@ const destinations = [{
 }]
 
 
-function svg(alphanum = null, bulletcolor = null, textcolor = null){
+function train(alphanum = null, bulletcolor = null, textcolor = null){
   if (alphanum === null) {
     alphanum = chars[Math.floor(Math.random() * 36)]
   }
@@ -96,4 +96,4 @@ function svg(alphanum = null, bulletcolor = null, textcolor = null){
   }
 }
 
-module.exports = svg
+module.exports = train

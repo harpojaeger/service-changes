@@ -20,7 +20,7 @@ app.get('/reason', (req, res) => {
   res.send(reason())
 })
 
-app.get('/form', (req, res) => {
+app.get('/change', (req, res) => {
   res.send(form())
 })
 
