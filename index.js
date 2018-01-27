@@ -4,7 +4,7 @@ const port = process.env.PORT || 5000
 const bullet = require('./bullet')
 
 app.get('/bullet', (req, res) => {
-  res.send(bullet(req.query.letter))
+  res.send(bullet(req.query.alphanum))
 })
 
 console.log('Server is running on port', port)
