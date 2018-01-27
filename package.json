@@ -1,0 +1,11 @@
+{
+  "name": "service-changes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Harpo Jaeger <harpo.jaeger@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "scripts" : {
+    "start" : "node index.js"
+  }
+}
