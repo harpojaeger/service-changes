@@ -4,18 +4,19 @@ const reason = require('./reasons')
 
 // Each form is a function that returns a service announcement object with html and text properties.
 const forms = [
-  () => {
-    // Q trains are not running between Foo and Bar because of <reason>
-    return `${train().data.train} trains are not running between ${station()} and ${station()} because of ${reason()}.`
-  },
-  () => {
-    // X trains are running on the P line between Foo and Bar because of <reason>
-    return `${train().data.train} trains are running on the ${train().data.train} line between ${station()} and ${station()} because of ${reason()}.`
-  },
-  () => {
-    // X trains make local stops between Foo and Bar because of <reason>
-    return `${train().data.train} trains make local stops between ${station()} and ${station()} because of ${reason()}.`
-  }
+  // Q trains are not running between Foo and Bar because of <reason>
+  () => `${train().data.train} trains are not running between ${station()} and ${station()} because of ${reason()}.`,
+
+  // X trains are running on the P line between Foo and Bar because of <reason>
+  () => `${train().data.train} trains are running on the ${train().data.train} line between ${station()} and ${station()} because of ${reason()}.`,
+
+  // X trains make local stops between Foo and Bar because of <reason>
+  () => `${train().data.train} trains make local stops between ${station()} and ${station()} because of ${reason()}.`,
+
+  // X trains run express from Foo to Bar because of <reason>
+  () => `${train().data.train} trains run express from ${station()} to ${station()} because of ${reason()}.`
+
+
 ]
 
 function form(){
