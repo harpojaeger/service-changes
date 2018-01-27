@@ -52,11 +52,11 @@ const chars = [...letters,...numbers]
 
 // This is just for fun, so the log looks nice.
 const destinations = [{
-  destination: 'downtown',
+  direction: 'downtown',
   article: 'a'
 },
 {
-  destination: 'uptown',
+  direction: 'uptown',
   article: 'an'
 }]
 
@@ -78,17 +78,22 @@ function svg(alphanum = null, bulletcolor = null, textcolor = null){
   }
   const destination = destinations[Math.floor(Math.random()*2)]
 
-  console.log('There is',destination.article,destination.destination,express?'express':'local',alphanum,'train approaching the station. Please stand away from the platform edge.')
-  
-  return `
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100" height="100">
+  console.log('There is',destination.article,destination.direction,express?'express':'local',alphanum,'train approaching the station. Please stand away from the platform edge.')
+
+  return {
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100" height="100">
       ${bullet}
       <text x="50" y="50" text-anchor="middle" dy=".35em" font-family="Helvetica" font-weight="bold" font-size="60" fill="${textcolor}">
         ${alphanum}
       </text>
     </svg>
-  `
-
+    `,
+    data: {
+      train: alphanum,
+      express: express,
+      destination: destination
+    }
+  }
 }
 
 module.exports = svg
