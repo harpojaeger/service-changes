@@ -16,7 +16,6 @@ const forms = [
   // X trains run express from Foo to Bar because of <reason>
   () => `${train().data.train} trains run express from ${station()} to ${station()} because of ${reason()}.`
 
-
 ]
 
 function form(){
