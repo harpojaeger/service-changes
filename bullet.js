@@ -50,6 +50,16 @@ const letters = Array(26).fill('').map((el, i) => String.fromCharCode(i+65))
 const numbers = Array(10).fill('').map((el, i) => String.fromCharCode(48+i))
 const chars = [...letters,...numbers]
 
+// This is just for fun, so the log looks nice.
+const destinations = [{
+  destination: 'downtown',
+  article: 'a'
+},
+{
+  destination: 'uptown',
+  article: 'an'
+}]
+
 
 function svg(alphanum = null, bulletcolor = null, textcolor = null){
   if (alphanum === null) {
@@ -62,9 +72,14 @@ function svg(alphanum = null, bulletcolor = null, textcolor = null){
   }
   var bullet = `<circle cx="50" cy="50" r="40" fill="${bulletcolor}" />`
   // 2 of 25 NYC Subway trains are express. Is this one?
-  if(Math.floor(Math.random()*26) < 3){
+  const express = Math.floor(Math.random()*26) < 3
+  if(express){
     bullet = `<polygon points="50,0 100,50, 50, 100, 0,50" fill="${bulletcolor}"/>`
   }
+  const destination = destinations[Math.floor(Math.random()*2)]
+
+  console.log('There is',destination.article,destination.destination,express?'express':'local',alphanum,'train approaching the station. Please stand away from the platform edge.')
+  
   return `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100" height="100">
       ${bullet}
