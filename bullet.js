@@ -60,9 +60,14 @@ function svg(alphanum = null, bulletcolor = null, textcolor = null){
     bulletcolor = colors[i].background
     textcolor = colors[i].text
   }
+  var bullet = `<circle cx="50" cy="50" r="40" fill="${bulletcolor}" />`
+  // 2 of 25 NYC Subway trains are express. Is this one?
+  if(Math.floor(Math.random()*26) < 3){
+    bullet = `<polygon points="50,0 100,50, 50, 100, 0,50" fill="${bulletcolor}"/>`
+  }
   return `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100" height="100">
-      <circle cx="50" cy="50" r="40" fill="${bulletcolor}" />
+      ${bullet}
       <text x="50" y="50" text-anchor="middle" dy=".35em" font-family="Helvetica" font-weight="bold" font-size="60" fill="${textcolor}">
         ${alphanum}
       </text>
