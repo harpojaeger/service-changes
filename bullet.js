@@ -45,9 +45,15 @@ const colors =
   }
 ]
 
+// An array with all uppercase letters and digits 0-9 in it.
+const letters = Array(26).fill('').map((el, i) => String.fromCharCode(i+65))
+const numbers = Array(10).fill('').map((el, i) => String.fromCharCode(48+i))
+const chars = [...letters,...numbers]
+
+
 function svg(alphanum = null, bulletcolor = null, textcolor = null){
   if (alphanum === null) {
-    alphanum = String.fromCharCode(65 + Math.floor(Math.random() * 26))
+    alphanum = chars[Math.floor(Math.random() * 36)]
   }
   if (bulletcolor === null){
     const i = Math.floor(Math.random() * colors.length)
