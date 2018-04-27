@@ -10,7 +10,8 @@
     "twitter": "^1.7.1"
   },
   "scripts": {
-    "start": "nodemon index.js --exec babel-node"
+    "start": "nodemon index.js --exec babel-node",
+    "stream": "nodemon stream.js --exec babel-node"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
