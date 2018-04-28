@@ -1,4 +1,4 @@
-import form from '../forms'
+import form from '../components/forms'
 import client from './client'
 
 var stream = createStream()
@@ -9,7 +9,6 @@ function createStream() {
 }
 
 function attachEventHandlers(stream) {
-  var counter = 0
   stream.on('data', function(event) {
     // Check if this event is in fact a tweet (adapted from lodash method at https://www.npmjs.com/package/twitter)
     if (typeof event.contributors === 'object' && typeof event.id_str === 'string' && typeof event.text === 'string') {
@@ -19,11 +18,8 @@ function attachEventHandlers(stream) {
         if ([null, event.user.id_str].includes(event.in_reply_to_user_id_str)) {
           const link = `http://twitter.com/${event.user.screen_name}/status/${event.id_str}`
           const text = `${form()} ${link}`
-          console.log(text)
-          if (counter === 0) {
-            client.sendTweet(text)
-            counter++
-          }
+          console.log('tweet composed:', text)
+          // client.sendTweet(text)
         } else {
           console.log('Skipping a reply to another account:', event)
         }
