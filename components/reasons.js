@@ -1,3 +1,4 @@
+// Helper functions to return a random instance of a particular part of speech
 const preposition = () => {
   const prepositions = ['because of', 'due to']
   return prepositions[Math.floor(Math.random()*prepositions.length)]
@@ -7,7 +8,7 @@ const conjunction = () => {
   return conjunctions[Math.floor(Math.random()*conjunctions.length)]
 }
 
-// Phrases that can be used in a sentence of the form ']J trains are not running between Foo and Bar because <reason>']
+// Phrases that can be used in a sentence of the form ']J trains are not running between Foo and Bar <reason>']
 const reasons = [
   [preposition, 'excessive pigeon activity'],
   [preposition, 'an unfortunate confluence of stoats'],
@@ -28,12 +29,12 @@ const reasons = [
   [preposition, 'a severe shortage of antidepressants'],
   [preposition, 'anxiety'],
   [conjunction, 'they woke up on the wrong side of the bed this morning'],
-  [conjunction, "that's just the way the cookie crumbles"],
-  [conjunction, "they're special snowflakes"],
+  ["because that's just the way the cookie crumbles"],
+  ["because they're special snowflakes"],
   [preposition, 'neo-conservative politics'],
   ['while our crews remove poison ivy from the third rail'],
   ['in order to avoid asteroids'],
-  [conjunction, 'Vladimir Putin is practing judo']
+  ['because Vladimir Putin is practing judo']
 ]
 
 function reason() {
