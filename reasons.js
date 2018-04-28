@@ -1,17 +1,43 @@
-// Phrases that can be used in a sentence of the form 'J trains are not running between Foo and Bar because of <reason>'
+const preposition = () => {
+  const prepositions = ['because of', 'due to']
+  return prepositions[Math.floor(Math.random()*prepositions.length)]
+}
+const conjunction = () => {
+  const conjunctions = ['because', 'since']
+  return conjunctions[Math.floor(Math.random()*conjunctions.length)]
+}
+
+// Phrases that can be used in a sentence of the form ']J trains are not running between Foo and Bar because <reason>']
 const reasons = [
-  'excessive pigeon activity',
-  'an unfortunate confluence of stoats',
-  'rapidly rising sea levels',
-  'construction',
-  'the unbearable lightness of being',
-  'malevolent bears',
-  "the Trump administration's racist deportation policies",
-  'MTA garbage collection'
+  [preposition, 'excessive pigeon activity'],
+  [preposition, 'an unfortunate confluence of stoats'],
+  [preposition, 'rapidly rising sea levels'],
+  [preposition, 'construction'],
+  [preposition, 'the unbearable lightness of being'],
+  [preposition, 'malevolent bears'],
+  [preposition, "the Trump administration's racist deportation policies"],
+  [preposition, 'MTA garbage collection'],
+  [preposition, 'the wind in the willows'],
+  [preposition, 'a runtime error'],
+  [preposition, 'poorly-configured trebuchets'],
+  [preposition, 'a stray paper airplane'],
+  [preposition, 'a pop-up M.I.A. concert'],
+  [preposition, 'logical fallacies'],
+  [preposition, 'shoddily-constructed cardboard boxes'],
+  [preposition, 'restaurant regret'],
+  [preposition, 'a severe shortage of antidepressants'],
+  [preposition, 'anxiety'],
+  [conjunction, 'they woke up on the wrong side of the bed this morning'],
+  [conjunction, "that's just the way the cookie crumbles"],
+
 ]
 
-function reason(){
-  return reasons[Math.floor(Math.random()*reasons.length)]
+function reason() {
+  const formula = [...reasons[Math.floor(Math.random()*reasons.length)]]
+  for (let i = 0; i < formula.length; i++) {
+    if (typeof formula[i] === 'function') formula[i] = formula[i]()
+  }
+  return formula.join(' ')
 }
 
 module.exports = reason
