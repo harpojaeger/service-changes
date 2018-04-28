@@ -5,7 +5,7 @@ var stream = createStream()
 attachEventHandlers(stream)
 
 function createStream() {
-  return client.stream('statuses/filter', {track: 'javascript'})
+  return client.stream('statuses/filter', {track: 'list:notmta/mta'})
 }
 
 function attachEventHandlers(stream) {
