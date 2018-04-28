@@ -11,7 +11,8 @@
   },
   "scripts": {
     "start": "nodemon index.js --exec babel-node",
-    "stream": "nodemon stream/stream.js --exec babel-node"
+    "dev": "nodemon stream/stream.js --exec babel-node",
+    "serve": "babel-node stream/stream.js"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
