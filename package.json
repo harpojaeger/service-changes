@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "nodemon index.js --exec babel-node",
     "devstream": "nodemon stream/stream.js --exec babel-node",
-    "serve": "node build/bundle.js",
+    "stream": "node build/bundle.js",
     "build": "webpack --config ./webpack.config.js",
     "postinstall": "yarn build"
   },
