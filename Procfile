@@ -1,1 +1,1 @@
-web: yarn serve
+worker: yarn serve
