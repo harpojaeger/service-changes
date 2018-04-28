@@ -78,7 +78,7 @@ function train(alphanum = null, bulletcolor = null, textcolor = null){
   }
   const destination = destinations[Math.floor(Math.random()*2)]
 
-  console.log('There is',destination.article,destination.direction,express?'express':'local',alphanum,'train approaching the station. Please stand away from the platform edge.')
+  // console.log('There is',destination.article,destination.direction,express?'express':'local',alphanum,'train approaching the station. Please stand away from the platform edge.')
 
   return {
     bullet: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100" height="100">

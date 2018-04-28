@@ -1,31 +1,11 @@
-import Twitter from 'twitter'
-import dotenv from 'dotenv'
-dotenv.config()
-import form from './forms.js'
-
-const {consumer_key, consumer_secret, access_token_key, access_token_secret} = process.env
-const client = new Twitter({
-  consumer_key,
-  consumer_secret,
-  access_token_key,
-  access_token_secret
-})
-
-client.sendTweet = function(text) {
-  this.post('statuses/update', {status: text},  function(error, tweet, response) {
-    if (error) {
-      console.error('Error posting tweet:', error)
-    } else {
-      console.log('Received response from statuses/update', response)
-    }
-  })
-}
+import form from '../forms'
+import client from './client'
 
 var stream = createStream()
 attachEventHandlers(stream)
 
 function createStream() {
-  return client.stream('statuses/filter', {track: 'trump'})
+  return client.stream('statuses/filter', {track: 'list:NotMTA/mta'})
 }
 
 function attachEventHandlers(stream) {
@@ -41,14 +21,14 @@ function attachEventHandlers(stream) {
           console.log(text)
           // client.sendTweet(`test: ${link}`)
         } else {
-          // console.log('Skipping a reply to another account:', event)
+          console.log('Skipping a reply to another account:', event)
         }
 
       } else {
-        // console.log('Skipping retweet event:', event)
+        console.log('Skipping retweet event:', event)
       }
     } else {
-      // console.log('Received non-tweet event:', event)
+      console.log('Received non-tweet event:', event)
     }
   })
 
