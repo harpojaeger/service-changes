@@ -5,10 +5,11 @@ var stream = createStream()
 attachEventHandlers(stream)
 
 function createStream() {
-  return client.stream('statuses/filter', {track: 'list:NotMTA/mta'})
+  return client.stream('statuses/filter', {track: 'trump'})
 }
 
 function attachEventHandlers(stream) {
+  var counter = 0
   stream.on('data', function(event) {
     // Check if this event is in fact a tweet (adapted from lodash method at https://www.npmjs.com/package/twitter)
     if (typeof event.contributors === 'object' && typeof event.id_str === 'string' && typeof event.text === 'string') {
@@ -19,7 +20,10 @@ function attachEventHandlers(stream) {
           const link = `http://twitter.com/${event.user.screen_name}/status/${event.id_str}`
           const text = `${form()} ${link}`
           console.log(text)
-          // client.sendTweet(`test: ${link}`)
+          if (counter === 0) {
+            client.sendTweet(text)
+            counter++
+          }
         } else {
           console.log('Skipping a reply to another account:', event)
         }
