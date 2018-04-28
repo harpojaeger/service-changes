@@ -29,7 +29,11 @@ const reasons = [
   [preposition, 'anxiety'],
   [conjunction, 'they woke up on the wrong side of the bed this morning'],
   [conjunction, "that's just the way the cookie crumbles"],
-
+  [conjunction, "they're special snowflakes"],
+  [preposition, 'neo-conservative politics'],
+  ['while our crews remove poison ivy from the third rail'],
+  ['in order to avoid asteroids'],
+  [conjunction, 'Vladimir Putin is practing judo']
 ]
 
 function reason() {

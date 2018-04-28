@@ -1,10 +1,10 @@
 const app = require('express')()
 require ('dotenv').config()
 const port = process.env.PORT || 5000
-const trains = require('./trains')
-const station = require('./stations')
-const reason = require('./reasons')
-const form = require('./forms')
+const trains = require('./components/trains')
+const station = require('./components/stations')
+const reason = require('./components/reasons')
+const form = require('./components/forms')
 
 app.get('/bullet', (req, res) => {
   res.send(trains(req.query.alphanum, req.query.bulletcolor, req.query.textcolor).bullet)

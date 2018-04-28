@@ -1,4 +1,4 @@
-const stationdata = require('./stationdata.json')
+const stationdata = require('../data/stations.json')
 const stations = stationdata.data
 
 function randomStation(){
