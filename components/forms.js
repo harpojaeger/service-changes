@@ -35,8 +35,6 @@ const forms = [
 
 ]
 
-function form(){
+export default function form(){
   return forms[Math.floor(Math.random()*forms.length)]()
 }
-
-module.exports = form

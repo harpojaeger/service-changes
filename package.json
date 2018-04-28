@@ -4,20 +4,27 @@
   "main": "index.js",
   "author": "Harpo Jaeger <harpo.jaeger@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "8.11.1"
+  },
   "dependencies": {
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "twitter": "^1.7.1"
   },
   "scripts": {
-    "start": "nodemon index.js --exec babel-node",
-    "dev": "nodemon stream/stream.js --exec babel-node",
-    "serve": "babel-node stream/stream.js"
+    "dev": "nodemon index.js --exec babel-node",
+    "devstream": "nodemon stream/stream.js --exec babel-node",
+    "serve": "node build/bundle.js",
+    "build": "webpack --config ./webpack.config.js",
+    "postinstall": "build"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.19.1",
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.17.3",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
   }
 }
