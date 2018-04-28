@@ -17,7 +17,7 @@
     "devstream": "nodemon stream/stream.js --exec babel-node",
     "serve": "node build/bundle.js",
     "build": "webpack --config ./webpack.config.js",
-    "postinstall": "build"
+    "postinstall": "yarn build"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
