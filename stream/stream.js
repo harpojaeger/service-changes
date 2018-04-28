@@ -14,7 +14,7 @@ function attachEventHandlers(stream) {
     // Check if this event is in fact a tweet (adapted from lodash method at https://www.npmjs.com/package/twitter)
     if (typeof event.contributors === 'object' && typeof event.id_str === 'string' && typeof event.text === 'string') {
       // Filter out retweets of other users
-      if (!event.hasOwnProperty('retweeted_status') || event.retweetedStatus.user.id_str === event.user.id_str) {
+      if (!event.hasOwnProperty('retweeted_status') || event.retweeted_status.user.id_str === event.user.id_str) {
         // Check that this tweet is not a reply, or is a reply to its own account (i.e. a thread)
         if ([null, event.user.id_str].includes(event.in_reply_to_user_id_str)) {
           const link = `http://twitter.com/${event.user.screen_name}/status/${event.id_str}`
