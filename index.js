@@ -24,7 +24,7 @@ app.get('/reason', (req, res) => {
 })
 
 app.get('/change', (req, res) => {
-  res.send(form())
+  res.send(200, form())
 })
 
 console.log('Server is running on port', port)
