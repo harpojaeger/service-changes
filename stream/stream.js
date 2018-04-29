@@ -1,35 +1,28 @@
 import form from '../components/forms'
 import client from './client'
+require('dotenv').config()
+const {NODE_ENV} = process.env
 
 var stream = createStream()
 attachEventHandlers(stream)
 
 function createStream() {
-  return client.stream('statuses/filter', {track: 'list:notmta/mta'})
+  console.log('NODE_ENV', NODE_ENV)
+  var track = 'javascript'
+  if (NODE_ENV === 'production') track = 'list:notmta/mta'
+  return client.stream('statuses/filter', {track})
 }
 
 function attachEventHandlers(stream) {
   stream.delay = 10
   stream.on('data', function(event) {
-    // Check if this event is in fact a tweet (adapted from lodash method at https://www.npmjs.com/package/twitter)
-    if (typeof event.contributors === 'object' && typeof event.id_str === 'string' && typeof event.text === 'string') {
+    if (eventFilter(event)) {
       const link = `http://twitter.com/${event.user.screen_name}/status/${event.id_str}`
-      // Filter out retweets of other users
-      if (!event.hasOwnProperty('retweeted_status') || event.retweeted_status.user.id_str === event.user.id_str) {
-        // Check that this tweet is not a reply, or is a reply to its own account (i.e. a thread)
-        if ([null, event.user.id_str].includes(event.in_reply_to_user_id_str)) {
-          const text = `${form()} ${link}`
-          console.log('tweet composed:', text)
-          // client.sendTweet(text)
-        } else {
-          console.log('Skipping a reply to another account:', link)
-        }
-
-      } else {
-        console.log('Skipping retweet event:', link)
-      }
+      const text = `${form()} ${link}`
+      console.log('tweet composed:', text)
+      if (NODE_ENV === 'production') client.sendTweet(text)
     } else {
-      console.log('Received non-tweet event:', event)
+      console.log('Rejected event', event)
     }
   })
 
@@ -46,4 +39,18 @@ function attachEventHandlers(stream) {
       stream.delay = delay * 2
     }, delay*1000)
   })
+}
+
+// Set up filters to screen out tweets we're not interested in
+function eventFilter (event) {
+  // Is this event actually a tweet?
+  if (!(typeof event.contributors === 'object' && typeof event.id_str === 'string' && typeof event.text === 'string')) return false
+
+  // Is this a retweet of another user?
+  if (event.hasOwnProperty('retweeted_status') && event.retweeted_status.user.id_str === event.user.id_str) return false
+
+  // Is this a reply to another user?
+  if (![null, event.user.id_str].includes(event.in_reply_to_user_id_str)) return false
+
+  return true
 }
