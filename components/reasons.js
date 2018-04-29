@@ -34,7 +34,7 @@ const reasons = [
   [preposition, 'neo-conservative politics'],
   ['while our crews remove poison ivy from the third rail'],
   ['in order to avoid asteroids'],
-  ['because Vladimir Putin is practing judo'],
+  ['because Vladimir Putin is practicing judo'],
   ['while crews practice the lindy hop'],
   [preposition, "Cardi B's incredible new album"],
 ]
