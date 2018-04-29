@@ -4,7 +4,7 @@ const reason = require('./reasons')
 import {holiday} from './holidays'
 import {relativeTime, specificTime, until} from './times'
 
-// In many cases, a <reason> and an <until> blockare interchangeable. This function lets us generate them dynamically so we don't have to write the same form twice.
+// In many cases, a <reason> and an <until> block are interchangeable. This function lets us generate them dynamically so we don't have to write the same form twice.
 const reasonOrUntil = () => Math.floor(Math.random()*2) ? reason() : `until ${until()}`
 
 // Each form is a function that returns a service announcement in text form.

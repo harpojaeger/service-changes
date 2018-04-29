@@ -52,5 +52,8 @@ function eventFilter (event) {
   // Is this a reply to another user?
   if (![null, event.user.id_str].includes(event.in_reply_to_user_id_str)) return false
 
+  // Filter out statuses about someone being struck by a train
+  if (/struck by a train/im.test(event.text)) return false
+
   return true
 }

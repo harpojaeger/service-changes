@@ -21,6 +21,9 @@ const untils = [
   'Amtrak gets their act together and standardizes all-door boarding',
   'the identities of the Final Five are revealed',
   'a suitable source of Tylium is identified',
+  'humankind has answered for its terrible deeds',
+  'Commander Riker learns to sit down in a chair like a normal human being',
+  'the Singularity'
 ]
 
 export const specificTime = () => new Date(Math.floor(Math.random()*1000*60*60*24)).toLocaleTimeString('en-US')

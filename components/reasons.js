@@ -37,6 +37,7 @@ const reasons = [
   ['because Vladimir Putin is practicing judo'],
   ['while crews practice the lindy hop'],
   [preposition, "Cardi B's incredible new album"],
+  [conjunction, 'the signaling system is made of cheese']
 ]
 
 function reason() {
