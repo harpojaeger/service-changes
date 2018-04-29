@@ -29,7 +29,7 @@ function attachEventHandlers(stream) {
         console.log('Skipping retweet event:', link)
       }
     } else {
-      console.log('Received non-tweet event:', link)
+      console.log('Received non-tweet event:', event)
     }
   })
 
