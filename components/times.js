@@ -13,7 +13,7 @@ const relativeTimes = [
 
 const untils = [
   'we can remember the words to Careless Whisper',
-  'mountain skip like rams, hills like sheep',
+  'mountains skip like rams, hills like sheep',
   'Gozer the Traveller comes in one of the pre-chosen forms',
   'the rectification of the Vuldronaii',
   'the third reconciliation of the last of the Meketrex Supplicants',
