@@ -8,9 +8,9 @@ attachEventHandlers(stream)
 
 function createStream() {
   console.log('NODE_ENV', NODE_ENV)
-  var track = 'javascript'
-  if (NODE_ENV === 'production') track = 'list:notmta/mta'
-  return client.stream('statuses/filter', {track})
+  var query = {track: 'javascript'}
+  if (NODE_ENV === 'production') query = {follow: '66379182'}
+  return client.stream('statuses/filter', query)
 }
 
 function attachEventHandlers(stream) {
