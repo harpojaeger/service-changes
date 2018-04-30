@@ -1,5 +1,5 @@
 const train = require('./trains')
-const station = require('./stations')
+import {station} from './stations'
 import {reason, problem, preposition} from './reasons'
 import {holiday} from './holidays'
 import {relativeTime, specificTime, until} from './times'
@@ -19,7 +19,7 @@ const forms = [
   // X trains make local stops between Foo and Bar <reason or until>
   () => `${train().data.train} trains make local stops between ${station()} and ${station()} ${reasonOrUntil()}.`,
 
-  // X trains run express from Foo to Bar <reason or until>
+  // // X trains run express from Foo to Bar <reason or until>
   () => `${train().data.train} trains run express from ${station()} to ${station()} ${reasonOrUntil()}.`,
 
   // X trains are rerouted via the Y line between Foo and Bar <reason or until>

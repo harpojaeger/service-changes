@@ -2,7 +2,7 @@ const app = require('express')()
 require ('dotenv').config()
 const port = process.env.PORT || 5000
 const trains = require('./components/trains')
-const station = require('./components/stations')
+import {station} from './components/stations'
 import {reason} from './components/reasons'
 import {form} from './components/forms'
 
