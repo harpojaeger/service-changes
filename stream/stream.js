@@ -1,7 +1,8 @@
 import form from '../components/forms'
 import client from './client'
 require('dotenv').config()
-const {NODE_ENV} = process.env
+const {NODE_ENV, TRACK} = process.env
+const NYCTSubway = '66379182'
 
 var stream = createStream()
 attachEventHandlers(stream)
@@ -9,7 +10,7 @@ attachEventHandlers(stream)
 function createStream() {
   console.log('NODE_ENV', NODE_ENV)
   var query = {track: 'javascript'}
-  if (NODE_ENV === 'production') query = {follow: '66379182'}
+  if (TRACK === 'actual') query = {follow: NYCTSubway}
   return client.stream('statuses/filter', query)
 }
 
@@ -45,6 +46,9 @@ function attachEventHandlers(stream) {
 function eventFilter (event) {
   // Is this event actually a tweet?
   if (!(typeof event.contributors === 'object' && typeof event.id_str === 'string' && typeof event.text === 'string')) return false
+
+  // Now that we're filtering by user ID, we get replies to this account as well. For now, filter these out (although it might be interesting to include them in the future).
+  if (event.user.id_str !== NYCTSubway) return false
 
   // Is this a retweet of another user?
   if (event.hasOwnProperty('retweeted_status') && event.retweeted_status.user.id_str === event.user.id_str) return false
