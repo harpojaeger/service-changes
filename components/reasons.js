@@ -1,12 +1,27 @@
 // Helper functions to return a random instance of a particular part of speech
-const preposition = () => {
+export const preposition = () => {
   const prepositions = ['because of', 'due to']
   return prepositions[Math.floor(Math.random()*prepositions.length)]
 }
-const conjunction = () => {
+export const conjunction = () => {
   const conjunctions = ['because', 'since']
   return conjunctions[Math.floor(Math.random()*conjunctions.length)]
 }
+
+// a train with <problem> problems
+const problems = [
+  'mechanical',
+  'strange',
+  '...honestly, just weird',
+  'heretofore-unseen',
+  'drinking',
+  'gambling',
+  'unthinkably complex',
+  'frankly inscrutable',
+  'singing'
+]
+
+export const problem = () => problems[Math.floor(Math.random()*problems.length)]
 
 // Phrases that can be used in a sentence of the form ']J trains are not running between Foo and Bar <reason>']
 const reasons = [
@@ -40,12 +55,10 @@ const reasons = [
   [conjunction, 'the signaling system is made of cheese']
 ]
 
-function reason() {
+export function reason() {
   const formula = [...reasons[Math.floor(Math.random()*reasons.length)]]
   for (let i = 0; i < formula.length; i++) {
     if (typeof formula[i] === 'function') formula[i] = formula[i]()
   }
   return formula.join(' ')
 }
-
-module.exports = reason

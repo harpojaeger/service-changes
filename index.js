@@ -3,8 +3,8 @@ require ('dotenv').config()
 const port = process.env.PORT || 5000
 const trains = require('./components/trains')
 const station = require('./components/stations')
-const reason = require('./components/reasons')
-const form = require('./components/forms')
+import {reason} from './components/reasons'
+import {form} from './components/forms'
 
 app.get('/bullet', (req, res) => {
   res.send(trains(req.query.alphanum, req.query.bulletcolor, req.query.textcolor).bullet)
@@ -24,7 +24,7 @@ app.get('/reason', (req, res) => {
 })
 
 app.get('/change', (req, res) => {
-  res.send(200, form())
+  res.status(200).send(form())
 })
 
 console.log('Server is running on port', port)

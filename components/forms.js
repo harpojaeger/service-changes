@@ -1,8 +1,9 @@
 const train = require('./trains')
 const station = require('./stations')
-const reason = require('./reasons')
+import {reason, problem, preposition} from './reasons'
 import {holiday} from './holidays'
 import {relativeTime, specificTime, until} from './times'
+import {compassDirection} from './directions'
 
 // In many cases, a <reason> and an <until> block are interchangeable. This function lets us generate them dynamically so we don't have to write the same form twice.
 const reasonOrUntil = () => Math.floor(Math.random()*2) ? reason() : `until ${until()}`
@@ -31,10 +32,15 @@ const forms = [
   () => `Starting ${relativeTime()} from ${specificTime()} to ${specificTime()}, ${train().data.train} trains skip ${station()} in both directions ${reason()}.`,
 
   // The <station>-bound platform at <station> is out of service until next <holiday>
-  () => `The ${station()}-bound platform at ${station()} is out of service until ${holiday()}.`
+  () => `The ${station()}-bound platform at ${station()} is out of service until ${holiday()}.`,
 
+  // <station>-bound trains skip <station> <preposition> a train with <problem> problems.
+  () => `${station()}-bound trains skip ${station()} ${preposition()} a train with ${problem()} problems.`,
+
+  // <compass direction>-bound trains skip <station> in both directions <preposition> a train with <problem> problems.
+  () => `${compassDirection({cap: true})}-bound trains skip ${station()} in both directions ${preposition()} a train with ${problem()} problems.`
 ]
 
-export default function form(){
+export function form(){
   return forms[Math.floor(Math.random()*forms.length)]()
 }
