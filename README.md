@@ -1,5 +1,5 @@
 # Fake MTA service changes
-A bot that listens for tweets from [@MTA](http://twitter.com/MTA) and [@NYCTSubway](http://twitter.com/NYCTSubway) and retweets them along with a fake service change announcement. Follow [@NotMTA](http://twitter.com/notmta) to see it in action!
+A bot that listens for tweets from [@NYCTSubway](http://twitter.com/NYCTSubway) and retweets them along with a fake service change announcement. Follow [@NotMTA](http://twitter.com/notmta) to see it in action!
 
 ## Usage
 1. `yarn install`
