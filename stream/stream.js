@@ -66,7 +66,7 @@ function eventFilter (event) {
   if (/injured/im.test(event.text)) return false
 
   // Filter out statuses about a sick passenger
-  if (/sick customer/im.test(event.text)) return false
+  if (/sick/im.test(event.text)) return false
 
   return true
 }
