@@ -6,7 +6,7 @@ const compassDirections = [
   'northeast',
   'southeast',
   'southwest',
-  'northweste',
+  'northwest',
   'north-northeast',
   'east-northeast',
   'east-southeast',

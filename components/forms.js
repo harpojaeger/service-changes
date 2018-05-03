@@ -38,7 +38,9 @@ const forms = [
   () => `${station()}-bound trains skip ${station()} ${preposition()} a train with ${problem()} problems.`,
 
   // <compass direction>-bound trains skip <station> in both directions <preposition> a train with <problem> problems.
-  () => `${compassDirection({cap: true})}-bound trains skip ${station()} in both directions ${preposition()} a train with ${problem()} problems.`
+  () => `${compassDirection({cap: true})}-bound trains skip ${station()} in both directions ${preposition()} a train with ${problem()} problems.`,
+
+  // Our crews are on the scene working to fix the switch problems as quickly as possible. We hope to have regular service restored soon.
 ]
 
 export function form(){

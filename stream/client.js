@@ -1,8 +1,6 @@
 import Twitter from 'twitter'
-import dotenv from 'dotenv'
-dotenv.config()
+import {consumer_key, consumer_secret, access_token_key, access_token_secret} from './consts'
 
-const {consumer_key, consumer_secret, access_token_key, access_token_secret} = process.env
 const client = new Twitter({
   consumer_key,
   consumer_secret,
