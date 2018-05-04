@@ -26,6 +26,7 @@ const untils = [
   'the Singularity'
 ]
 
+// TODO make this sometime return just an hour, sometimes H:M, sometimes H:MS, just for added surrealism.
 export const specificTime = () => new Date(Math.floor(Math.random()*1000*60*60*24)).toLocaleTimeString('en-US')
 
 export const relativeTime = () => relativeTimes[Math.floor(Math.random()*relativeTimes.length)]
