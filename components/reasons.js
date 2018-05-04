@@ -23,7 +23,7 @@ const problems = [
 
 export const problem = () => problems[Math.floor(Math.random()*problems.length)]
 
-// Phrases that can be used in a sentence of the form ']J trains are not running between Foo and Bar <reason>']
+// Phrases that can be used in a sentence of the form 'J trains are not running between Foo and Bar <reason>'
 const reasons = [
   [preposition, 'excessive pigeon activity'],
   [preposition, 'an unfortunate confluence of stoats'],
