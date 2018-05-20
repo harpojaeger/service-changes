@@ -23,7 +23,16 @@ const untils = [
   'a suitable source of Tylium is identified',
   'humankind has answered for its terrible deeds',
   'Commander Riker learns to sit down in a chair like a normal human being',
-  'the Singularity'
+  'the Singularity',
+  'Chewbacca gets a paid translator',
+  "the rocks melt with the sun, my love, 'til the rocks melt with the sun",
+  'the guy in the gorilla suit gets a seat',
+  'the graffiti artist gets his damn spray cans back',
+  'the oligarchs roam the streets with begging bowls',
+  'Rudy Giuliani gets indicted',
+  'Mike Bloomberg moves to Cuba',
+  'you are personally fired for lateness',
+  'no one can afford any apartment anywhere'
 ]
 
 // TODO make this sometime return just an hour, sometimes H:M, sometimes H:MS, just for added surrealism.

@@ -12,7 +12,9 @@ const holidays = [
   "Ta'anit Esther", // Fast of Esther, a minor fast day observed on erev Purim
   'Celebration of the Golden Spurs', // a Flemish community celebration in Belgium
   'Dia de los Muertos',
-  'First Contact Day'
+  'First Contact Day',
+  'Bastille Day',
+  'Unification Day'
 ]
 
 export const holiday = () => holidays[Math.floor(Math.random()*holidays.length)]
