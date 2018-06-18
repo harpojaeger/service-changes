@@ -5,7 +5,8 @@
   "author": "Harpo Jaeger <harpo.jaeger@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "8.11.1"
+    "node": "8.11.1",
+    "yarn": "1.7.0"
   },
   "dependencies": {
     "dotenv": "^5.0.1",
