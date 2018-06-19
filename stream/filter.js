@@ -12,10 +12,13 @@ const disallowedPhrases = [
 export const eventFilter = event => {
   return checkForExclusion(event)
   .then(() => Promise.resolve())
-  .catch(({tweet_id, reason, detail}) => {
-    console.error('received exlusion', tweet_id, reason, detail)
-    recordExclusion({tweet_id, reason, detail})
-    return Promise.reject('Tweet rejected by filter. Exclusion recorded.')
+  .catch(exclusion => {
+    if (exclusion) { // An exclusion can return false if it shouldn't be recorded in the DB, as with other users' tweets
+      const {tweet_id, reason, detail} = exclusion
+      console.error('received exlusion', tweet_id, reason, detail)
+      recordExclusion({tweet_id, reason, detail})
+    }
+    return Promise.reject(`${exclusion ? 'Recorded' : 'Received'} exclusion ${JSON.stringify(exclusion)}`)
   })
 }
 
@@ -24,9 +27,8 @@ const checkForExclusion = event => {
   // Is this event actually a tweet?
   if (!(typeof contributors === 'object' && typeof id_str === 'string' && typeof text === 'string')) return Promise.reject({tweet_id: id_str, reason: 'Not a tweet'})
 
-  // Now that we're filtering by user ID, we get replies to this account as well. For now, filter these out (although it might be interesting to include them in the future).
-  if (TRACK === 'actual' && user.id_str !== NYCTSUBWAY) return Promise.reject({tweet_id: id_str, reason: 'Not a tweet from @NYCTSUBWAY'})
-  // TODO set up the filter so these tweets are not logged in the DB.
+  // Filter out replies to the target account (it might be interesting to include them in the future). Return false to prevent these from being logged in the DB, which is unnecessary.
+  if (TRACK === 'actual' && user.id_str !== NYCTSUBWAY) return Promise.reject(false)
 
   // Is this a retweet of another user?
   if (retweeted_status && retweeted_status.user.id_str === user.id_str) return Promise.reject({tweet_id: id_str, reason: 'Retweet of other user', detail: retweeted_status.user.id_str})
