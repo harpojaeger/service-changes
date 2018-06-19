@@ -10,4 +10,4 @@ A bot that listens for tweets from [@NYCTSubway](http://twitter.com/NYCTSubway) 
 3. `cp .env.example .env` and configure envs. You'll need [credentials from your Twitter account](http://apps.twitter.com/) for the Twitter envs. You must specify a PostgreSQL database URL in production and staging. In development, if no database URL is set, (`./dev.sqlite3`) is used.
 4. Configure envs `track` and `NODE_ENV`. When `track=actual`, the actual NYCTSubway account is monitored. Otherwise, the phrase 'javascript' is passed to the streaming filter, to ensure plenty of tweets to test the settings. `NODE_ENV=production` enables sending of tweets, in addition to `console.log`ing them.
 5. `knex migrate:latest` (you'll need to `npm install -g knex` first)
-6. `yarn devstream` to connect to the Twitter Streaming API and start sending tweets.
+6. `yarn devstream` to connect to the Twitter Streaming API and start listening for tweets.
