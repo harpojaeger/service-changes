@@ -16,14 +16,14 @@ function createStream() {
 function attachEventHandlers(stream) {
   stream.delay = 10
   stream.on('data', function(event) {
-    if (eventFilter(event)) {
+    eventFilter(event)
+    .then(() => {
       const link = `http://twitter.com/${event.user.screen_name}/status/${event.id_str}`
       const text = `${form()} ${link}`
       console.log('tweet composed:', text)
       if (NODE_ENV === 'production') client.sendTweet(text)
-    } else {
-      console.log('Rejected event', event)
-    }
+    })
+    .catch(console.error)
   })
 
   // This doesn't work very well

@@ -5,11 +5,15 @@
   "author": "Harpo Jaeger <harpo.jaeger@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "8.11.1"
+    "node": "8.11.1",
+    "yarn": "1.7.0"
   },
   "dependencies": {
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
+    "knex": "^0.14.6",
+    "pg": "^7.4.3",
+    "sqlite3": "^4.0.0",
     "twitter": "^1.7.1"
   },
   "scripts": {
