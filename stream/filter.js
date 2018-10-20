@@ -1,5 +1,5 @@
-import {TRACK, NYCTSUBWAY, NODE_ENV} from './consts'
-const knex = require('knex')(require('../knexfile.js')[NODE_ENV])
+import {TRACK} from './consts'
+import client from './client'
 
 // Phrases that should disqualify a tweet. These will be searched as a regexp.
 const disallowedPhrases = [
@@ -9,26 +9,13 @@ const disallowedPhrases = [
   'sick'
 ]
 
-export const eventFilter = event => {
-  return checkForExclusion(event)
-  .then(() => Promise.resolve())
-  .catch(exclusion => {
-    if (exclusion) { // An exclusion can return false if it shouldn't be recorded in the DB, as with other users' tweets
-      const {tweet_id, reason, detail} = exclusion
-      console.error('received exlusion', tweet_id, reason, detail)
-      recordExclusion({tweet_id, reason, detail})
-    }
-    return Promise.reject(`${exclusion ? 'Recorded' : 'Received'} exclusion ${JSON.stringify(exclusion)}`)
-  })
-}
-
-const checkForExclusion = event => {
-  const {contributors, id_str, text, user, retweeted_status, in_reply_to_status_id, in_reply_to_user_id_str} = event
+export const eventFilter = async event => {
+  const {contributors, id_str, text, user, retweeted_status, in_reply_to_status_id_str, in_reply_to_user_id_str} = event
   // Is this event actually a tweet?
   if (!(typeof contributors === 'object' && typeof id_str === 'string' && typeof text === 'string')) return Promise.reject({tweet_id: id_str, reason: 'Not a tweet'})
 
   // Filter out replies to the target account (it might be interesting to include them in the future). Return false to prevent these from being logged in the DB, which is unnecessary.
-  if (TRACK === 'actual' && user.id_str !== NYCTSUBWAY) return Promise.reject(false)
+  if (TRACK && user.id_str !== TRACK) return Promise.reject(false)
 
   // Is this a retweet of another user?
   if (retweeted_status && retweeted_status.user.id_str === user.id_str) return Promise.reject({tweet_id: id_str, reason: 'Retweet of other user', detail: retweeted_status.user.id_str})
@@ -43,26 +30,24 @@ const checkForExclusion = event => {
     if(exp.test(text)) return Promise.reject({tweet_id: id_str, reason: 'Rejected phrase', detail: phrase})
   }
 
-  // check that this is not a retweet or reply of a previously-excluded tweet.
-  var idToSearch
-  if (retweeted_status) idToSearch = retweeted_status.id_str
-  if (in_reply_to_status_id) idToSearch = in_reply_to_status_id
-  if (idToSearch) {
-    console.log('searching for tweet', idToSearch, 'in previously excluded tweets')
-    return knex.select('tweet_id').from('excluded').where({tweet_id: idToSearch})
-    .then(rows => {
-      if (rows.length > 0) {
-        const {tweet_id} = rows[0]
-        const reason = `${retweeted_status ? 'retweet of' : 'reply to'} previously-excluded tweet`
-        return Promise.reject({tweet_id: id_str, reason, detail: tweet_id})
-      } else {
-        console.log('tweet', idToSearch, 'was not previously excluded')
-      }
-    })
+  // recursively check that this is not a retweet or reply of an excluded tweet.
+  var ancestorTweet
+  if (retweeted_status) {
+    console.log(id_str, 'is a retweet')
+    client.addTweetToCache(retweeted_status)
+    ancestorTweet = retweeted_status
+  } else if (in_reply_to_status_id_str) {
+    console.log(id_str, 'is a reply')
+    ancestorTweet = await client.getTweet(in_reply_to_status_id_str)
+  }
+  if (ancestorTweet) {
+    console.log(ancestorTweet.id_str, 'is the ancestor tweet to', id_str)
+    return eventFilter(ancestorTweet)
+    // const ancestorExclusion = await eventFilter(ancestorTweet)
+    // console.log('ancestor exclusion is', ancestorExclusion)
+  } else {
+    console.log('no ancestor tweet found')
+    return Promise.resolve()
   }
 
-  return Promise.resolve()
 }
-
-const recordExclusion = ({tweet_id, reason, detail}) => knex('excluded').insert({tweet_id, reason, detail})
-.then(inserted => (console.log('inserted exclusion', inserted)))

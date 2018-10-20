@@ -1,7 +1,7 @@
 import {form} from '../components/forms'
 import client from './client'
 import {eventFilter} from './filter'
-import {TRACK, NODE_ENV, NYCTSUBWAY} from './consts'
+import {TRACK, NODE_ENV} from './consts'
 
 var stream = createStream()
 attachEventHandlers(stream)
@@ -9,7 +9,8 @@ attachEventHandlers(stream)
 function createStream() {
   console.log('NODE_ENV', NODE_ENV, 'TRACK', TRACK)
   var query = {track: 'javascript'}
-  if (TRACK === 'actual') query = {follow: NYCTSUBWAY}
+  if (TRACK) query = {follow: TRACK}
+
   return client.stream('statuses/filter', query)
 }
 
@@ -23,7 +24,10 @@ function attachEventHandlers(stream) {
       console.log('tweet composed:', text)
       if (NODE_ENV === 'production') client.sendTweet(text)
     })
-    .catch(console.error)
+    .catch(exclusion => {
+      const {tweet_id, reason, detail} = exclusion
+      console.error('received exlusion', tweet_id, reason, detail)
+    })
   })
 
   // This doesn't work very well

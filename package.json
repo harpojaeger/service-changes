@@ -6,7 +6,7 @@
   "license": "MIT",
   "engines": {
     "node": "8.11.1",
-    "yarn": "1.7.0"
+    "yarn": "1.10.1"
   },
   "dependencies": {
     "dotenv": "^5.0.1",
