@@ -25,8 +25,7 @@ function attachEventHandlers(stream) {
       if (NODE_ENV === 'production') client.sendTweet(text)
     })
     .catch(exclusion => {
-      const {tweet_id, reason, detail} = exclusion
-      console.error('received exlusion', tweet_id, reason, detail)
+      console.error('received exlusion', exclusion)
     })
   })
 

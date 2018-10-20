@@ -22,7 +22,7 @@ var tweetDetailsMap = {}
 // Caching-enabled function for retrieving tweet details
 client.getTweet = async function(id) {
   if(tweetDetailsMap[id]) {
-    // console.log('found tweet', id, 'in cache')
+    console.log('found tweet', id, 'in cache')
     return Promise.resolve(tweetDetailsMap[id])
   } else {
     // console.log('tweet', id, 'not found in cache')
