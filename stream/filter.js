@@ -38,15 +38,12 @@ export const eventFilter = async (event, stack = []) => {
     var ancestorTweet
     const newStack = [...stack, id_str]
     if (retweeted_status) {
-      // console.log(id_str, 'is a retweet')
       client.addTweetToCache(retweeted_status)
       ancestorTweet = retweeted_status
     } else if (in_reply_to_status_id_str) {
-      // console.log(id_str, 'is a reply')
       ancestorTweet = await client.getTweet(in_reply_to_status_id_str)
     }
     if (ancestorTweet) {
-      // console.log(ancestorTweet.id_str, 'is the ancestor tweet to', id_str)
       return eventFilter(ancestorTweet, newStack)
     }
   }
