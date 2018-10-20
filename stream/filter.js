@@ -36,7 +36,6 @@ export const eventFilter = async (event, stack = []) => {
 
     // recursively check that this is not a retweet or reply of an excluded tweet.
     var ancestorTweet
-    const newStack = [...stack, id_str]
     if (retweeted_status) {
       client.addTweetToCache(retweeted_status)
       ancestorTweet = retweeted_status
