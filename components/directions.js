@@ -17,7 +17,7 @@ const compassDirections = [
   'north-northwest'
 ]
 
-export function compassDirection({cap = false}) {
+export function compassDirection({cap = false} = {}) {
   var compassDirection = compassDirections[Math.floor(Math.random()*compassDirections.length)]
   if (cap) compassDirection = `${compassDirection.charAt(0).toUpperCase()}${compassDirection.slice(1)}`
   return compassDirection

@@ -35,9 +35,10 @@ const forms = [
 
   () => `${train().data.train} service has resumed following an earlier ${incident()}.`,
 
-  () => `Some ${train().data.train} trains end at ${station()} ${reasonOrUntil()}.`
+  () => `Some ${train().data.train} trains end at ${station()} ${reasonOrUntil()}.`,
 
-  // add form from @MichelleLhooq ("A train has grown wings and is runnin backwards, etc.")
+  // This form inspired by https://twitter.com/MichelleLhooq/status/1044643839435321344
+  () => `The ${train().data.train} train is running ${compassDirection()} on the ${train().data.train} line to ${station()} before it grows wings and flies to ${station()}.`,
 
 ]
 
