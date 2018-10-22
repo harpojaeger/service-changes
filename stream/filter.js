@@ -1,12 +1,14 @@
 import {TRACK} from './consts'
 import client from './client'
 
-// Phrases that should disqualify a tweet. These will be searched as a regexp.
+// Phrases that should disqualify a tweet. These will be searched as a regex.
 const disallowedPhrases = [
   'struck by a train',
   'medical assistance',
   'injured',
-  'sick'
+  'sick',
+  'unauthorized',
+  'EMS',
 ]
 
 export const eventFilter = async (event, stack = []) => {
