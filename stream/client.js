@@ -8,12 +8,12 @@ const client = new Twitter({
   access_token_secret
 })
 
-client.sendTweet = function(text) {
-  this.post('statuses/update', {status: text},  function(error, tweet, response) {
+client.sendTweet = function(status) {
+  this.post('statuses/update', {status},  function(error, tweet, response) {
     if (error) {
       console.error('Error posting tweet:', error)
     } else {
-      console.log('Received response from statuses/update', response)
+      console.log('Tweet sent successfully.', tweet)
     }
   })
 }
