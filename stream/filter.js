@@ -5,6 +5,7 @@ import client from './client'
 const disallowedPhrases = [
   'struck by a train',
   'medical assistance',
+  'medical attention',
   'injured',
   'sick',
   'unauthorized',
@@ -33,7 +34,7 @@ export const eventFilter = async (event, stack = []) => {
     for (let i = 0; i < disallowedPhrases.length; i++) {
       const phrase = disallowedPhrases[i]
       const exp = new RegExp(phrase, 'im')
-      if(exp.test(text)) throw `Rejected phrase: ${text}`
+      if(exp.test(text)) throw `Rejected phrase: '${exp}': ${text}`
     }
 
     // recursively check that this is not a retweet or reply of an excluded tweet.
