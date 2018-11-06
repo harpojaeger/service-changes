@@ -14,7 +14,8 @@ const holidays = [
   'Dia de los Muertos',
   'First Contact Day',
   'Bastille Day',
-  'Unification Day'
+  'Unification Day',
+  'Cthulhu Day'
 ]
 
 export const holiday = () => holidays[Math.floor(Math.random()*holidays.length)]
