@@ -3,7 +3,7 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    // plugins: ['async-await'],
+    plugins: ['jest'],
     "extends": "eslint:recommended",
     "parserOptions": {
         "sourceType": "module",
