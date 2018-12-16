@@ -15,6 +15,7 @@ const disallowedPhrases = [
 export const eventFilter = async (event, stack = []) => {
   const {contributors, id_str, text, user, retweeted_status, in_reply_to_status_id_str, in_reply_to_user_id_str} = event
 
+  // TODO change this so the old stack isn't added if empty. This will make thrown errors more comprehensible.
   const newStack = [...stack, id_str]
 
   try {
