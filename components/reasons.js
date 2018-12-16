@@ -23,7 +23,13 @@ const problems = [
   'singing',
   'dancing',
   'jumping',
-  'tooth'
+  'tooth',
+  '99',
+  'chortling',
+  'fidgeting',
+  'boy',
+  'steam',
+  'dandruff',
 ]
 
 export const problem = () => problems[Math.floor(Math.random()*problems.length)]

@@ -8,7 +8,8 @@ const incidents = [
   'marshmallow explosion',
   'careful academic inquiry',
   'long speech on the need for a renewed global Marxist politic',
-  'string cheese investigation'
+  'string cheese investigation',
+  'molasses disaster',
 ]
 
 export const incident = () => incidents[Math.floor(Math.random()*incidents.length)]
