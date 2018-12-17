@@ -1,4 +1,5 @@
 import {TRACK} from './consts'
+import {NonTweetObjectError} from './errors'
 import client from './client'
 
 // Phrases that should disqualify a tweet. These will be searched as a regex.
@@ -20,7 +21,7 @@ export const eventFilter = async (event, stack = []) => {
 
   try {
     // Is this event actually a tweet?
-    if (!(typeof contributors === 'object' && typeof id_str === 'string' && typeof text === 'string')) throw 'Not a tweet'
+    if (!(typeof contributors === 'object' && typeof id_str === 'string' && typeof text === 'string')) throw new NonTweetObjectError
 
     // Filter out replies to the target account (it might be interesting to include them in the future). Return false to prevent these from being logged in the DB, which is unnecessary.
     if (TRACK && user.id_str !== TRACK) throw 'Reply from other user'
