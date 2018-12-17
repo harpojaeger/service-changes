@@ -14,3 +14,11 @@ export class NonTweetObjectError extends TweetFilterError {
     this.name = 'NonTweetObjectError'
   }
 }
+
+// IgnoredTweetError can be used for replies to & from other users, as well as retweets of other users, so its message can be set per-instance.
+export class IgnoredTweetError extends TweetFilterError {
+  constructor(message) {
+    super(message)
+    this.name = 'IgnoredTweetError'
+  }
+}
