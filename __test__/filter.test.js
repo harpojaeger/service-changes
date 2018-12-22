@@ -1,22 +1,33 @@
 import {eventFilter} from '../stream/filter.js'
-import {NonTweetObjectError, IgnoredTweetError} from '../stream/errors.js'
-
-// Environment variables to make available in jest tests via process.env. These will overwrite any values already set via any other method, so they can be relied upon for testing.
-const testingEnvs = {
-  track: 1053738493216735232, // @NYCTSUBWAY, so we can test the reply and retweet filters.
-}
+import {
+  NonTweetObjectError,
+  IgnoredTweetError,
+  REPLY_TO_OTHER_USER,
+  TWEET_FROM_OTHER_USER
+} from '../stream/errors.js'
+import replyToOtherUser from './data/reply_to_other_user.json'
+import tweetFromOtherUser from './data/tweet_from_other_user.json'
 
 describe('The filter module', () => {
-
-  // Explicitly provide envs to each Jest test.
-  beforeEach(() => {
-    process.env = Object.assign(process.env, testingEnvs)
-  })
 
   test('rejects non-tweet objects', () => {
     expect.assertions(1)
     return expect(eventFilter({foo: 'bar'})).rejects.toEqual(
-      [undefined, new NonTweetObjectError])
+      [undefined, new NonTweetObjectError()])
   })
-  
+
+  test('rejects replies to other users', () => {
+    expect.assertions(1)
+    return expect(eventFilter(replyToOtherUser)).rejects.toEqual(
+      [replyToOtherUser.id_str, new IgnoredTweetError(REPLY_TO_OTHER_USER)]
+    )
+  })
+
+  test('rejects tweet from other users', () => {
+    expect.assertions(1)
+    return expect(eventFilter(tweetFromOtherUser)).rejects.toEqual(
+      [tweetFromOtherUser.id_str, new IgnoredTweetError(TWEET_FROM_OTHER_USER)]
+    )
+  })
+
 })

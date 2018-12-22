@@ -1,5 +1,11 @@
 import {TRACK} from './consts'
-import {NonTweetObjectError} from './errors'
+import {
+  NonTweetObjectError,
+  IgnoredTweetError,
+  TWEET_FROM_OTHER_USER,
+  REPLY_TO_OTHER_USER,
+  RETWEET_OF_OTHER_USER
+} from './errors'
 import client from './client'
 
 // Phrases that should disqualify a tweet. These will be searched as a regex.
@@ -21,16 +27,19 @@ export const eventFilter = async (event, stack = []) => {
 
   try {
     // Is this event actually a tweet?
-    if (!(typeof contributors === 'object' && typeof id_str === 'string' && typeof text === 'string')) throw new NonTweetObjectError
+    if (!(typeof contributors === 'object' && typeof id_str === 'string' && typeof text === 'string')) throw new NonTweetObjectError()
 
-    // Filter out replies to the target account (it might be interesting to include them in the future).
-    if (TRACK && user.id_str !== TRACK) throw 'Reply from other user'
+    // The following errors should only be thrown if we're tracking a particular account.
+    if (TRACK) {
+      // Is this a reply to another user?
+      if (in_reply_to_user_id_str && in_reply_to_user_id_str !== TRACK) throw new IgnoredTweetError(REPLY_TO_OTHER_USER)
+
+      // Filter out tweets from other users, such as replies to the target account (it might be interesting to include them in the future).
+      if (user.id_str !== TRACK) throw new IgnoredTweetError(TWEET_FROM_OTHER_USER)
+    }
 
     // Is this a retweet of another user?
-    if (retweeted_status && retweeted_status.user.id_str !== user.id_str) throw 'Retweet of other user'
-
-    // Is this a reply to another user?
-    if (![null, user.id_str].includes(in_reply_to_user_id_str)) throw 'Reply to other user'
+    if (retweeted_status && retweeted_status.user.id_str !== user.id_str) throw new IgnoredTweetError(RETWEET_OF_OTHER_USER)
 
     // check for disallowed phrases
     for (let i = 0; i < disallowedPhrases.length; i++) {
