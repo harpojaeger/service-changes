@@ -9,6 +9,5 @@ const ids = process.argv.slice(2)
 if (ids.length > 1) {
   Promise.all(ids.map(client.getTweet)).then(details => console.log(JSON.stringify(details)))
 } else if (ids.length === 1) {
-  client.getTweet(ids[0]).then(details => console.log(JSON.stringify(details))
-)
+  client.getTweet(ids[0]).then(details => console.log(JSON.stringify(details)))
 }

@@ -9,7 +9,7 @@ const client = new Twitter({
 })
 
 client.sendTweet = function(status) {
-  this.post('statuses/update', {status},  function(error, tweet, response) {
+  this.post('statuses/update', {status},  function(error, tweet) {
     if (error) {
       console.error('Error posting tweet:', error)
     } else {

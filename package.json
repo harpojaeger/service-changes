@@ -19,7 +19,8 @@
     "stream": "node build/bundle.js",
     "build": "webpack --config ./webpack.config.js",
     "postinstall": "yarn build",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ignore-pattern=build ./"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
