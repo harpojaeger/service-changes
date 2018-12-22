@@ -25,3 +25,12 @@ export class IgnoredTweetError extends TweetFilterError {
 export const REPLY_TO_OTHER_USER = 'Reply to other user.'
 export const TWEET_FROM_OTHER_USER = 'Tweet from other user.'
 export const RETWEET_OF_OTHER_USER = 'Retweet of other user.'
+
+export class RejectedPhraseError extends TweetFilterError {
+  constructor(phrase, fullText) {
+    super(`Rejected phrase: ${phrase} in text: ${fullText}`)
+    this.name = 'RejectedPhraseError'
+    this.phrase = phrase
+    this.fullText = fullText
+  }
+}

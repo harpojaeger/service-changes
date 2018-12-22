@@ -8,7 +8,7 @@ import {
 import replyToOtherUser from './data/reply_to_other_user.json'
 import tweetFromOtherUser from './data/tweet_from_other_user.json'
 
-describe('The filter module', () => {
+describe('The basic filer module', () => {
 
   test('rejects non-tweet objects', () => {
     expect.assertions(1)

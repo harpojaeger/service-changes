@@ -4,7 +4,8 @@ import {
   IgnoredTweetError,
   TWEET_FROM_OTHER_USER,
   REPLY_TO_OTHER_USER,
-  RETWEET_OF_OTHER_USER
+  RETWEET_OF_OTHER_USER,
+  RejectedPhraseError
 } from './errors'
 import client from './client'
 
@@ -13,6 +14,7 @@ const disallowedPhrases = [
   'struck by a train',
   'medical assistance',
   'medical attention',
+  'medical help',
   'injured',
   'sick',
   'unauthorized',
@@ -45,7 +47,7 @@ export const eventFilter = async (event, stack = []) => {
     for (let i = 0; i < disallowedPhrases.length; i++) {
       const phrase = disallowedPhrases[i]
       const exp = new RegExp(phrase, 'im')
-      if(exp.test(text)) throw `Rejected phrase: '${exp}': ${text}`
+      if(exp.test(text)) throw new RejectedPhraseError(phrase, text)
     }
 
     // recursively check that this is not a retweet or reply of an excluded tweet.
