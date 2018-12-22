@@ -16,3 +16,6 @@ A bot that listens for tweets from [@NYCTSubway](http://twitter.com/NYCTSubway) 
 ## Testing
 
 `yarn test` to run tests. They're fairly limited right now, but I'm working on building them out, particularly for the filter module.
+
+## Utilities
+`util/fetchtweet` is a small Node script for pulling tweet JSON objects from the Twitter REST API. It uses the credentials you've configured for the rest of the application. Pass it Tweet IDs as arguments.
