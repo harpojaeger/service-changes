@@ -22,7 +22,7 @@ var tweetDetailsMap = {}
 // Caching-enabled function for retrieving tweet details
 client.getTweet = async function(id) {
   if(tweetDetailsMap[id]) {
-    console.log('found tweet', id, 'in cache')
+    // console.log('found tweet', id, 'in cache')
     return Promise.resolve(tweetDetailsMap[id])
   } else {
     // console.log('tweet', id, 'not found in cache')
@@ -41,11 +41,11 @@ client.getTweet = async function(id) {
 
 client.addTweetToCache = function(tweet) {
   if(Object.keys(tweetDetailsMap).length > 1000) { // very basic cache mgmt
-    console.log('cache reset')
+    // console.log('cache reset')
     tweetDetailsMap = {}
   }
   if(!tweetDetailsMap[tweet.id_str]) {
-    console.log('tweet', tweet.id_str, 'added to cache')
+    // console.log('tweet', tweet.id_str, 'added to cache')
     tweetDetailsMap[tweet.id_str] = tweet
   }
 }
