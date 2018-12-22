@@ -10,22 +10,19 @@ import tweetFromOtherUser from './data/tweet_from_other_user.json'
 
 describe('The basic filer module', () => {
 
-  test('rejects non-tweet objects', () => {
-    expect.assertions(1)
-    return expect(eventFilter({foo: 'bar'})).rejects.toEqual(
+  test('rejects non-tweet objects', async () => {
+    await expect(eventFilter({foo: 'bar'})).rejects.toEqual(
       [undefined, new NonTweetObjectError()])
   })
 
-  test('rejects replies to other users', () => {
-    expect.assertions(1)
-    return expect(eventFilter(replyToOtherUser)).rejects.toEqual(
+  test('rejects replies to other users', async () => {
+    await expect(eventFilter(replyToOtherUser)).rejects.toEqual(
       [replyToOtherUser.id_str, new IgnoredTweetError(REPLY_TO_OTHER_USER)]
     )
   })
 
-  test('rejects tweet from other users', () => {
-    expect.assertions(1)
-    return expect(eventFilter(tweetFromOtherUser)).rejects.toEqual(
+  test('rejects tweet from other users', async () => {
+    await expect(eventFilter(tweetFromOtherUser)).rejects.toEqual(
       [tweetFromOtherUser.id_str, new IgnoredTweetError(TWEET_FROM_OTHER_USER)]
     )
   })

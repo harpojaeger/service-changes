@@ -18,8 +18,11 @@ describe('The rejected phrase filter', () => {
 
   // Generate a test on the fly for each of the above disallowed phrases.
   disallowedPhrases.forEach(async ([phrase, tweetObject]) => {
-    /** Some tweets are longer than 140 characters (https://developer.twitter.com/en/docs/tweets/tweet-updates), which means that if a rejected phrase appears near the end of the tweet, it may not be caught here. Fixing this will probably require modifying the streaming client so it receives tweets with the full_text property.
-    */
+    /** Some tweets are longer than 140 characters
+      (https://developer.twitter.com/en/docs/tweets/tweet-updates), which means
+      that if a rejected phrase appears near the end of the tweet, it may not be
+      caught here. Fixing this will probably require modifying the streaming
+      client so it receives tweets with the full_text property. */
     test(`rejects a tweet using the phrase '${phrase}'`, async () => {
       await expect(eventFilter(tweetObject)).rejects.toEqual(
         [tweetObject.id_str, new RejectedPhraseError(phrase, tweetObject.text)]
