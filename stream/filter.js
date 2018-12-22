@@ -19,6 +19,7 @@ const disallowedPhrases = [
   'sick',
   'unauthorized',
   'EMS',
+  'fatal',
 ]
 
 export const eventFilter = async (event, stack = []) => {
